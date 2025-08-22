@@ -17,7 +17,6 @@ function anvil(target, recipe = [], processed = []) {
   console.log("anvil()", target, recipe)
   var offset = 0
   for (let i in recipe) {
-    if (recipe[i] === "") continue;
     // if recipe says Hit, branch into 3 solutions and return the best one
     if (recipe[i] === "Hit") {
       let rSlice = recipe.slice(i + 1)
@@ -65,7 +64,7 @@ const solution = document.getElementById("anvil-solution")
 
 form.onsubmit = e => {
   let target = parseInt(targetInput.value)
-  let recipe = recipeDropdowns.map(elem => elem.options[elem.selectedIndex].value)
+  let recipe = recipeDropdowns.map(elem => elem.options[elem.selectedIndex].value).filter(v => v !== "")
 
   let result = anvil(target, recipe)
   console.log("final", result)
